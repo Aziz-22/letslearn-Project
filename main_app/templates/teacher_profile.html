@@ -1,0 +1,242 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/imagehover.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/teacherProfile.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Profile</title>
+
+</head>
+
+<body>
+
+    {% include 'messages.html' %}
+
+    <div class="container">
+        <div class="main-body">
+
+
+
+            <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <form id="form1" action="" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    
+                                    {{ user.user_profile.image.url }}
+                                    <img src="{{ user.user_profile.image.url }}" id="blah" alt="your image"
+                                        class="rounded-circle" width="150">
+                                    <!-- <input type="submit" value="Upload"> -->
+
+                                </form>
+
+
+
+                                <div class="mt-12">
+
+                                    <!-- <form>
+                                        <input type="file" name="profile_image" accept="image/*" id="id_image"
+                                            value="Change Picture">
+                                        <img id="blah" src="#" alt="your image" />
+                                    </form> -->
+                                    <!-- <form id="form1" runat="server">
+                                        <input type='file' id="imgInp" />
+                                        <img id="blah" src="#" alt="your image" />
+                                    </form> -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-3">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+
+                                <a href="#"><span class="text-secondary">Activity</span></a>
+                            </li>
+
+
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+
+                                <a href="#"><span class="text-secondary">History</span></a>
+
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-twitter mr-2 icon-inline text-info">
+                                        <path
+                                            d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                                        </path>
+                                    </svg>Twitter</h6>
+                                <span class="text-secondary">@bootdey</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-instagram mr-2 icon-inline text-danger">
+                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                    </svg>Instagram</h6>
+                                <span class="text-secondary">bootdey</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-facebook mr-2 icon-inline text-primary">
+                                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z">
+                                        </path>
+                                    </svg>Facebook</h6>
+                                <span class="text-secondary">bootdey</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="col-md-8 cards">
+                    <h3 style="text-align: center; font-weight: bold; position: absolute; top: 0;left: 0; right: 0;">
+                        Your Account </h3>
+
+                    <div class="profile_form">
+
+
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            {% for hidden_field in form.hidden_fields %}
+                            {{ hidden_field }}
+                            {% endfor %}
+
+                            {% for field in form.visible_fields %}
+                            <div class="form-group">
+                                <!-- This For The Label's input -->
+                                {{ field.label_tag }}
+                                <!-- This for input field -->
+                                {{ field }}
+                                <!-- This if the input has a hint for a user -->
+                                {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                                {% endif %}
+                                {{field.password}}
+                            </div>
+                            {% endfor %}
+
+
+                            
+
+                            <label for="major">Major</label>
+                            <input type="text" class="form-control" id="major" name="major" value="{{user.user_profile.major}}">
+
+                            <br>
+                            <label for="experience">Experience</label>
+                            <input type="text" class="form-control" id="experience" name="experience">
+                            <br>
+                            <input type='file' id="imgInp" />
+                            <br>
+                            <input type="submit" value="Update!" class="btn btn-success">
+                            <a href="" data-target="#password" data-toggle="modal">Do you want to change your
+                                password?</a>
+                            <!-- <button class="btn btn-info">Do you want to change your password?</button> -->
+
+
+
+                        </form>
+
+                    </div>
+
+
+
+                </div>
+                <div class="modal fade" id="password" role="dialog">
+                    <div class="modal-dialog modal-sm">
+                        <!-- Modal content no 1-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title text-center form-title">Change Password</h4>
+                            </div>
+                            <div class="modal-body padtrbl">
+                                <div class="login-box-body">
+                                    <p class="login-box-msg">Sign in to start your session</p>
+                                    <div class="form-group">
+                                        <form name="" action="password/" id="passwordForm" method="POST">
+                                            {% csrf_token %}
+                                            <div class="form-group has-feedback">
+                                                <!----- username -------------->
+                                                <input class="form-control" name="old_password"
+                                                    placeholder="Enter Old Password" id="loginid" type="text"
+                                                    autocomplete="off" />
+
+                                                <!---Alredy exists  ! -->
+                                                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                            </div>
+                                            <div class="form-group has-feedback">
+                                                <!----- password -------------->
+                                                <input class="form-control" name="new_password"
+                                                    placeholder="Enter New Password" id="loginpsw" type="password"
+                                                    autocomplete="off" />
+                                                <span style="
+                                        display: none;
+                                        font-weight: bold;
+                                        position: absolute;
+                                        color: grey;
+                                        position: absolute;
+                                        padding: 4px;
+                                        font-size: 11px;
+                                        background-color: rgba(128, 128, 128, 0.26);
+                                        z-index: 17;
+                                        right: 27px;
+                                        top: 5px;
+                                      " id="span_loginpsw"></span>
+                                                <!---Alredy exists  ! -->
+                                                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col-xs-12">
+                                                    <input type="submit" value="Change"
+                                                        class="btn btn-green btn-block btn-flat" onclick="userlogin()">
+
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts Files  -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'contactform/contactform.js' %}"></script>
+    <!-- <script src="{% static 'js/previewImage.js' %}"></script> -->
+</body>
+
+</html>

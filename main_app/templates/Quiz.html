@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+{'qustions' : range(qustions) }
+
+<hr/>
+
+<section id="contact" class="section-padding">
+  <div class="container content">
+    <div class="row">
+      <div class="header-section text-center">
+        <h2>Take your quiz</h2>
+        <p>{{quiz.quiz_name}}</p>
+        <hr class="bottom-line" />
+        {% for question in qustions %}
+        <h3>{{question.question_name}}</h3>
+        {% for choice in question.choices %}
+        <input name= 'choices' type="radio"> {{choice}}</input> 
+        {% endfor %}
+        {% endfor %}
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

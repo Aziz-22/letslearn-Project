@@ -1,0 +1,80 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="row">
+  <div class="column side">
+    <!-- sidebar-search  -->
+    <div class="sidenav">
+      <ul>
+        <li class="header-menu">
+          <span>{{course.course_name}}</span>
+        </li>
+        <li class="sidebar-dropdown">
+          <a href="/lessons/3">
+            <i class="fa fa-tachometer-alt"></i>
+            <span>Lessons</span>
+            <span class="badge badge-pill badge-warning">New</span>
+          </a>
+          <div class="sidebar-submenu">
+            <ul>
+              {% for lesson in lessons %}
+              <li>
+                {% for link in newLink %}
+                <a href="#" onclick="getv(`{{link}}`)"
+                  >{% endfor %} {{lesson.lesson_name}}
+                  <span class="badge badge-pill badge-success">Pro</span>
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </li>
+        <li class="header-menu">
+          <span>Extra</span>
+        </li>
+        <li>
+          <a href="/takeQuiz">
+            <i class="fa fa-book"></i>
+            <span>Quick Quziz</span>
+            <span class="badge badge-pill badge-primary">Beta</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa fa-calendar"></i>
+            <span>Calendar</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa fa-folder"></i>
+            <span>Examples</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- sidebar-menu  -->
+  </div>
+  <div class="column middle">
+    <h2>{{course.course_name}}</h2>
+    <p>
+      {% for lesson in lessons %}
+      <iframe
+        id="ytplayer"
+        type="text/html"
+        width="640"
+        height="360"
+        src=""
+        frameborder="0"
+      ></iframe>
+      {% endfor %}
+    </p>
+    <p>{{course.description}}</p>
+  </div>
+  <div class="column side"></div>
+</div>
+<script>
+  function getv(lesson) {
+    document.getElementById("ytplayer").src = lesson;
+    console.log(lesson);
+  }
+</script>
+{% endblock %}
