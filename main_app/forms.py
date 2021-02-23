@@ -58,7 +58,7 @@ class AddCourseForm(forms.ModelForm):
     class Meta:
         model = Course
         fields = ('course_name', 'subject_title', 'level',
-                  'duration', 'description', 'course_image', 'user')
+                  'duration', 'description', 'course_image')
         subjects = (
             ('', 'Select a subject'),
             # First one is the value of select option and second is the displayed value in option
@@ -79,19 +79,19 @@ class AddCourseForm(forms.ModelForm):
             'level': forms.Select(choices=levels, attrs={'class': 'form-control'}),
             'duration': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
-            'user': forms.Select(attrs={'class': 'form-control'}),
+            # 'user': forms.Select(attrs={'class': 'form-control'}),
         }
             
 
 class QuizForm(forms.ModelForm):
     class Meta:
             model = Quiz
-            fields = ['quiz_name','user', 'course']
+            fields = ['quiz_name', 'course']
 
             widgets = {
                 'course' : forms.Select(attrs={'class':'form-control'}),
                 'quiz_name' : forms.TextInput(attrs={'class':'form-control'}),
-                'user' : forms.Select(attrs={'class':'form-control'}),
+                
             }
 
 
