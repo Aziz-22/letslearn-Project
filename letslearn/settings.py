@@ -141,3 +141,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATICFILES_DIRS =[
     os.path.join(BASE_DIR,'static')
 ]
+
+# Afnan code
+# SMTP Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'learn7524@gmail.com'
+EMAIL_HOST_PASSWORD = 'learn09876'

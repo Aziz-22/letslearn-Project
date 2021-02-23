@@ -1,4 +1,14 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
+<br />
+<br />
+<a href="/TeacherCourses/lesson/create/"
+  ><button class="btn btn-green">Add Lesson</button></a
+>
+<a href="/TeacherCourses/quiz/create/"
+  ><button class="btn btn-green">Add Quiz</button></a
+>
+<br />
+<br />
 <section id="contact" class="section-padding">
   <div class="container content">
     <div class="row">
@@ -15,14 +25,12 @@
       <div id="errormessage"></div>
       <div class="form-group createClass">
         <form method="post" enctype="multipart/form-data">
-          
           {% csrf_token %} {{ form }}
-          <hr/>
-          {% for formset in inlines %}
-            {{ formset }}
-            <hr/>
+          <hr />
+          {% for formset in inlines %} {{ formset }}
+          <hr />
           {% endfor %}
-          
+
           <input type="submit" value="Submit" />
         </form>
       </div>

@@ -2,7 +2,7 @@
 # main_app/views.py
 from django.contrib.auth.models import User, auth
 from django.http.response import HttpResponseRedirect
-from main_app.models import User_Profile,Course, Lesson, Quiz, Question
+from main_app.models import User_Profile,Course, Lesson, Quiz, Question,Enrollment
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
@@ -12,6 +12,7 @@ from django.contrib import messages
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView, InlineFormSetFactory
 from django.forms import modelformset_factory, inlineformset_factory,formset_factory
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.decorators import login_required
 # from django.contrib.auth.hashers import make_password
 
 
@@ -257,4 +258,23 @@ def courses_teacher(request, user_id):
     courses = Course.objects.filter(user_id=user_id)
     template_name = "CoursesTeacher.html"
     return render(request, 'TeacherCourses/CoursesTeacher.html', {'cousres': courses})
+
+def courseView(request):
+    courses = Course.objects.all()
+    model = Course
+    template_name = "index.html"
+    return render(request, 'index.html', {'courses': courses})
+
+    
+@login_required(login_url='login')
+def EnrollCourse(request,course_id):
+    user = Enrollment.objects.create(course_id = course_id, user_id = 1)
+    user.save()
+    return HttpResponseRedirect('/')
+#end of work
+
+class CourseDelete(DeleteView):
+    model = Course 
+    template_name = 'course_confirm_delete.html'
+    success_url = '../'
 

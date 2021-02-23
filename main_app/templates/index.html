@@ -58,7 +58,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html">Men<span>tor</span></a>
+          <a class="navbar-brand" href="index.html">Let's<span>Learn</span></a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
@@ -553,109 +553,24 @@
     <!--/ Faculity member-->
     
     <!--Courses-->
-    <section id="courses" class="section-padding">
-      <div class="container">
-        <div class="row">
-          <div class="header-section text-center">
-            <h2>Courses</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Exercitationem nesciunt vitae,<br />
-              maiores, magni dolorum aliquam.
-            </p>
-            <hr class="bottom-line" />
-          </div>
+    <div class="container">
+      <div class="row">
+        {% for course in courses %}
+        <div class="col-md-4 col-sm-6 padleft-right">
+          <figure class="imghvr-fold-up">
+            <img src="{{ course.course_image.url }}"  width="400px" height="350px" />
+            <figcaption>
+              <h3>{{ course.course_name }}</h3>
+              <p>
+                {{ course.description }}
+              </p> 
+            </figcaption>
+          </figure>
+          <button><a href="/enroll/{{course.id}}">Enroll</a></button>
         </div>
+        {% endfor %}
       </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4 col-sm-6 padleft-right">
-            <figure class="imghvr-fold-up">
-              <img src="{% static 'img/mentor.jpg' %}" class="img-responsive" />
-              <figcaption>
-                <h3>Course Name</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Magnam atque, nostrum veniam consequatur libero fugiat,
-                  similique quis.
-                </p>
-              </figcaption>
-              <a href="#"></a>
-            </figure>
-          </div>
-          <div class="col-md-4 col-sm-6 padleft-right">
-            <figure class="imghvr-fold-up">
-              <img src="{% static 'img/mentor.jpg' %}" class="img-responsive" />
-              <figcaption>
-                <h3>Course Name</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Magnam atque, nostrum veniam consequatur libero fugiat,
-                  similique quis.
-                </p>
-              </figcaption>
-              <a href="#"></a>
-            </figure>
-          </div>
-          <div class="col-md-4 col-sm-6 padleft-right">
-            <figure class="imghvr-fold-up">
-              <img src="{% static 'img/mentor.jpg' %}" class="img-responsive" />
-              <figcaption>
-                <h3>Course Name</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Magnam atque, nostrum veniam consequatur libero fugiat,
-                  similique quis.
-                </p>
-              </figcaption>
-              <a href="#"></a>
-            </figure>
-          </div>
-          <div class="col-md-4 col-sm-6 padleft-right">
-            <figure class="imghvr-fold-up">
-              <img src="{% static 'img/mentor.jpg' %}" class="img-responsive" />
-              <figcaption>
-                <h3>Course Name</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Magnam atque, nostrum veniam consequatur libero fugiat,
-                  similique quis.
-                </p>
-              </figcaption>
-              <a href="#"></a>
-            </figure>
-          </div>
-          <div class="col-md-4 col-sm-6 padleft-right">
-            <figure class="imghvr-fold-up">
-              <img src="{% static 'img/mentor.jpg' %}" class="img-responsive" />
-              <figcaption>
-                <h3>Course Name</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Magnam atque, nostrum veniam consequatur libero fugiat,
-                  similique quis.
-                </p>
-              </figcaption>
-              <a href="#"></a>
-            </figure>
-          </div>
-          <div class="col-md-4 col-sm-6 padleft-right">
-            <figure class="imghvr-fold-up">
-              <img src="{% static 'img/mentor.jpg' %}" class="img-responsive" />
-              <figcaption>
-                <h3>Course Name</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Magnam atque, nostrum veniam consequatur libero fugiat,
-                  similique quis.
-                </p>
-              </figcaption>
-              <a href="#"></a>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
     <!--/ Courses-->
 
     <!--Contact-->

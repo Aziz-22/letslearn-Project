@@ -11,7 +11,7 @@ class User_Profile(models.Model):
     major = models.CharField(max_length=100)
     experience = models.CharField(max_length=500)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='media/images/', default='default.png')
+    image = models.ImageField(upload_to='images/', default='default.png')
     
     # def set_image_to_default(self):
     #     self.image.delete(save=False)  # delete old image file
