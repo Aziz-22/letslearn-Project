@@ -22,6 +22,8 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
+# AUTH_USER_MODEL = 'bgbUser'
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -94,7 +96,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'newletslearn',
         'USER': 'postgres',
-        'PASSWORD': 'M3S*j*HYC6^CQi'
+        'PASSWORD': 'admin22'
     }
 }
 
