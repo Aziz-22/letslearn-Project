@@ -12,15 +12,15 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <form id="form1" action="" method="POST" enctype="multipart/form-data">
-                                    {% csrf_token %}
+                                <!-- <form id="form1" action="" method="POST" enctype="multipart/form-data"> -->
+                    
                                     
                                     {{ user.user_profile.image.url }}
                                     <img src="{{ user.user_profile.image.url }}" id="blah" alt="your image"
                                         class="rounded-circle" width="150">
                                     <!-- <input type="submit" value="Upload"> -->
 
-                                </form>
+                                <!-- </form> -->
 
 
 
@@ -119,15 +119,15 @@
                             {% endfor %}
 
 
-                            
+                            {{user.user_profile.major}}
 
-                            <label for="major">Major</label>
-                            <input type="text" class="form-control" id="major" name="major" value="{{user.user_profile.major}}">
+                            <!-- <label for="major">Major</label>
+                            <input type="text" class="form-control" id="major" name="major" value="{{user.user_profile.major}}"> -->
 
-                            <br>
+                            <!-- <br>
                             <label for="experience">Experience</label>
                             <input type="text" class="form-control" id="experience" name="experience">
-                            <br>
+                            <br> -->
                             <input type='file' id="imgInp" />
                             <br>
                             <input type="submit" value="Update!" class="btn btn-success">

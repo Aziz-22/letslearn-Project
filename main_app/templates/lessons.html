@@ -1,70 +1,64 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 <div class="row">
-  <div class="column side">
+  <div class="lnav">
     <!-- sidebar-search  -->
-    <div class="sidenav">
-      <ul>
-        <li class="header-menu">
-          <span>{{course.course_name}}</span>
-        </li>
-        <li class="sidebar-dropdown">
-          <a href="/lessons/3">
-            <i class="fa fa-tachometer-alt"></i>
-            <span>Lessons</span>
-            <span class="badge badge-pill badge-warning">New</span>
-          </a>
-          <div class="sidebar-submenu">
-            <ul>
-              {% for lesson in lessons %}
-              <li>
-                {% for link in newLink %}
-                <a href="#" onclick="getv(`{{link}}`)"
-                  >{% endfor %} {{lesson.lesson_name}}
-                  <span class="badge badge-pill badge-success">Pro</span>
-                </a>
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </li>
-        <li class="header-menu">
-          <span>Extra</span>
-        </li>
-        <li>
-          <a href="/quiz/{{course.id}}">
-            <i class="fa fa-book"></i>
-            <span>Quick Quziz</span>
-            <span class="badge badge-pill badge-primary">Beta</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-calendar"></i>
-            <span>Calendar</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-folder"></i>
-            <span>Examples</span>
-          </a>
-        </li>
-      </ul>
-    </div>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+    <link rel="stylesheet" href="{% static 'css/lessons.css' %}?{% now 'U' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?{% now 'U' %}" />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <nav class="navbar navbar-default sidebar" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse"
+            data-target="#bs-sidebar-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="#">Home<span style="font-size: 16px"
+                  class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lessons <span class="caret"></span><span
+                  style="font-size: 16px"
+                  class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a>
+              <ul class="dropdown-menu forAnimate" role="menu">
+                {% for lesson in lessons %}
+                <li>
+                  {% for link in newLink %}
+                  <a href="#" onclick="getv(`{{link}}`)">{% endfor %} {{lesson.lesson_name}}
+                    <span class="showopacity glyphicon glyphicon-facetime-video"></span>
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </li>
+            <li>
+              <a href="#">Qiuz<span style="font-size: 16px"
+                  class="pull-right hidden-xs showopacity glyphicon glyphicon-pencil"></span></a>
+            </li>
+            <li>
+              <a href="#">Tags<span style="font-size: 16px"
+                  class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     <!-- sidebar-menu  -->
   </div>
   <div class="column middle">
     <h2>{{course.course_name}}</h2>
     <p>
       {% for lesson in lessons %}
-      <iframe
-        id="ytplayer"
-        type="text/html"
-        width="640"
-        height="360"
-        src=""
-        frameborder="0"
-      ></iframe>
+      <iframe id="ytplayer" type="text/html" width="640" height="360" src="" frameborder="0"></iframe>
       {% endfor %}
     </p>
     <p>{{course.description}}</p>

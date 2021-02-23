@@ -7,8 +7,7 @@ from django.contrib.auth import views as auth_views
 # Afnan code
 urlpatterns = [
     # Abdulaziz's Code
-    path('teacher/profile/<pk>/update/',
-         views.ProfileUpdate.as_view(), name='profile_update'),
+    path('teacher/profile/<int:pk>/update/', views.ProfileUpdate.as_view(), name='profile_update'),
 
     #     path('teacher/profile/<int:pk>/update/password/',
     #          views.PasswordUpdate.as_view(), name='password_update'),
@@ -40,19 +39,18 @@ urlpatterns = [
     path('TeacherCourses/lesson/create/', views.LessonCreate.as_view(), name='addCourse_create'),
     path('TeacherCourses/quiz/create/', views.QuizCreate.as_view(), name='addCourse_create'),
     path('TeacherCourses/delete/<int:pk>', views.CourseDelete.as_view(), name='addCourse_create'),
+    path('courses/', views.EnrolledCourses, name='addCourse_create'),
 
     # END Maryam Work 
 
     path('addCourse', views.addCourse, name='addCourse'),
     path('addCourse/create/', views.CourseCreate.as_view(), name='addCourse_create'),
-    path('TeacherCourses/<int:user_id>/',
-         views.courses_teacher, name='courses_teacher'),
+
     # END Maryam Work
     # Start Shahad Work
 
-    path('profile/<int:pk>/update',
-         views.profileUpdate.as_view(), name='User_Profile'),
-    path('profile/<int:pk>/update/', views.profileUpdate.as_view(), name='User_Profile'),
+    path('profile/<int:pk>/update', views.profileUpdate.as_view(), name='User_Profile'),
+    
 
      #   abdulaziz and shahad work on enroll btn
     path('enroll/<int:course_id>/' , views.EnrollCourse, name='Enroll'),
