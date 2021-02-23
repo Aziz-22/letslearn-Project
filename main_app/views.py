@@ -6,7 +6,7 @@ from main_app.models import User_Profile,Course, Lesson, Quiz, Question,Enrollme
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
-from .forms import User_Profile, AddCourseForm, LessonForm, QuizForm, QuestionForm, Preview_Image, PasswordForm, User_Profile_Form
+from .forms import User_Profile_Form, AddCourseForm, LessonForm, QuizForm, QuestionForm, Teacher_Profile_Form, Preview_Image, PasswordForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView, InlineFormSetFactory
@@ -14,8 +14,9 @@ from django.forms import modelformset_factory, inlineformset_factory,formset_fac
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.decorators import login_required
 import logging
+from django.utils.decorators import method_decorator
 
-# from django.contrib.auth.hashers import make_password
+
 
 
 
@@ -33,7 +34,8 @@ def index(request):
 
 # Abdulaziz's Code
 
-
+@method_decorator(login_required(login_url='login'), name='dispatch')
+# Teacher Profile
 class ProfileUpdate(UpdateView):
     print("UPDATE")
     template_name = "teacher_profile.html"
@@ -52,9 +54,9 @@ class ProfileUpdate(UpdateView):
 class ProfileUpdateImage(UpdateView):
     print("IMAGE")
     template_name = "teacher_profile.html"
-    model = User_Profile
-    fields = ['image']
-    form_class = User_Profile_Form
+    model = User_Profile_Form
+    # fields = ['image']
+    form_class = Teacher_Profile_Form
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -64,11 +66,11 @@ class ProfileUpdateImage(UpdateView):
 
 
 def preview(request, pk):
-    user = request.user.user_profile
-    form = User_Profile(instance=user)
+    user = request.user.User_Profile_Form
+    form = User_Profile_Form(instance=user)
 
     if request.method == 'POST':
-        form = User_Profile(request.POST, request.FILES, instance=user)
+        form = User_Profile_Form(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
 
@@ -137,9 +139,9 @@ def login(request):
         if user is not None:
             auth.login(request,user)
             if user.is_authenticated and user.is_staff == True:
-                return redirect('/teacher/profile/' + str(user.id) + '/update') #Go to student profile
+                return redirect('/teacher/profile/' + str(user.id) + '/update') #Go to teacher profile
             elif user.is_authenticated and user.is_staff == False:
-                return redirect('/profile/' + str(user.id) + '/update') #Go to teacher profile
+                return redirect('/profile/' + str(user.id) + '/update') #Go to learner profile
             return redirect('/')
         else:
             messages.info(request,'The username and/or password is incorrect.')
@@ -156,15 +158,18 @@ def logout(request):
 
 
 # profile update shahad
+# Learner Profile
+# @login_required(login_url='login')
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class profileUpdate(UpdateView):
     template_name = "profile.html"
     model = User
-    form_class = User_Profile
+    form_class = User_Profile_Form
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.save()
-
+        messages.success(self.request, 'Updating Successfully!')
         return HttpResponseRedirect('/profile/' + str(self.object.pk)+ '/update')
 
 
@@ -256,10 +261,6 @@ def CoursesTeacher(request, user_id):
 
 
 
-def courses_teacher(request, user_id):
-    courses = Course.objects.filter(user_id=user_id)
-    template_name = "CoursesTeacher.html"
-    return render(request, 'TeacherCourses/CoursesTeacher.html', {'cousres': courses})
 
 def courseView(request):
     courses = Course.objects.all()
@@ -269,6 +270,7 @@ def courseView(request):
 
     
 @login_required(login_url='login')
+
 def EnrollCourse(request,course_id):
     def form_valid(self, form):
             self.object = form.save(commit=False)
@@ -276,7 +278,8 @@ def EnrollCourse(request,course_id):
             self.object.save()
     user = Enrollment.objects.create(course_id = course_id, user_id = request.user.id)
     user.save()
-    return HttpResponseRedirect('/')
+    messages.success(request, 'Successfully Enrolled')
+    return HttpResponseRedirect('/lessons/' + str(course_id))
 #end of work
 
 class CourseDelete(DeleteView):

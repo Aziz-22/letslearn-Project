@@ -7,32 +7,30 @@ from .models import User, Course, Lesson, User_Profile, Quiz, Question
 
 #forms for profile shahad
 
-class User_Profile(forms.ModelForm):
+class User_Profile_Form(forms.ModelForm):
         class Meta:
             model = User
-            fields = ['username','first_name','last_name','email','password']
+            fields = ['username','first_name','last_name','email']
             widgets = {
                 'username' : forms.TextInput(attrs={'class':'form-control'}),
                 'first_name' : forms.TextInput(attrs={'class':'form-control'}),
                 'last_name' :forms.TextInput(attrs={'class':'form-control'}),
                 'email' : forms.TextInput(attrs={'class':'form-control'}),
-                'password':forms.TextInput(attrs={'class':'form-control'})
+                'password':forms.TextInput(attrs={'class':'form-control'}),
+                
             }
 
 
 
 
-class User_Profile_Form(forms.ModelForm):
+class Teacher_Profile_Form(forms.ModelForm):
     class Meta:
-        model = User
-        fields = ['username', 'first_name', 'last_name', 'email']
+        model = User_Profile
+        fields = ['major' , 'experience' , 'image']
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.TextInput(attrs={'class': 'form-control'}),
-            'password': forms.TextInput(attrs={'class': 'form-control'}),
-
+            'major': forms.TextInput(attrs={'class': 'form-control'}),
+            'experience': forms.TextInput(attrs={'class': 'form-control'}),
+            
         }
 
 

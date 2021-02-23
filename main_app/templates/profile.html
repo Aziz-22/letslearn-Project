@@ -1,5 +1,9 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
+<!-- Learner Profile -->
+<!-- {% if user.is_authenticated and user.is_staff == False %} -->
+
+{% include 'messages.html' %}
 
   <div class="container">
     <div class="main-body">
@@ -71,4 +75,5 @@
             </div>
         </div>
     </div>
+    <!-- {% endif %} -->
 {% endblock %}

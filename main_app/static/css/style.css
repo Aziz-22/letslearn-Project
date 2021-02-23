@@ -141,7 +141,7 @@ Navigation bar
 Banner
 ************************************/
 .banner {
-  background: url("../img/bg-banner.jpg") no-repeat center top;
+  background: url("../img/bg-banner.png") no-repeat center top;
   background-size: cover;
   min-height: 580px;
   position: relative;
@@ -333,6 +333,7 @@ h2 {
 }
 .heading p {
   text-align: left;
+  text-align: inherit;
 }
 /***********************************
  Organisations
@@ -342,7 +343,7 @@ h2 {
 }
 .orga-stru {
   background-color: #5fcf80;
-  width: 109px;
+  width: 138px;
   height: auto;
   padding: 10px 10px 25px 10px;
   text-align: center;
@@ -372,6 +373,7 @@ h3.det-txt {
   font-size: 40px;
   font-weight: bold;
   text-transform: uppercase;
+  margin-top: 140px;
 }
 h4.sm-txt {
   color: #5fcf80;

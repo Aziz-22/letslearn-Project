@@ -1,32 +1,31 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
-
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 DEFAULT = '../media/default.png'
 
-class User_Profile(models.Model):
 
+#
+
+
+class User_Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     major = models.CharField(max_length=100)
     experience = models.CharField(max_length=500)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images/', default='default.png')
-    
+
     # def set_image_to_default(self):
     #     self.image.delete(save=False)  # delete old image file
     #     self.image = DEFAULT
     #     self.save()
 
-
     def __str__(self):
         return self.user.username
 
 
-#img profile shahad
-
-
-
+# img profile shahad
 
 
 class Course(models.Model):
@@ -34,20 +33,17 @@ class Course(models.Model):
     # START Maryam Work
     course_name = models.CharField(max_length=100)
     description = models.CharField(max_length=500,  default='Description')
-    course_image = models.ImageField(upload_to='images/', null=True, blank=True)
+    course_image = models.ImageField(
+        upload_to='images/', null=True, blank=True)
     subject_title = models.CharField(max_length=100)
     level = models.CharField(max_length=50)
     start_date = models.DateField(auto_now_add=True)
     duration = models.DurationField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-
     def __str__(self):
         return self.course_name
-# END Maryam Work 
-
-
-
+# END Maryam Work
 
 
 class Lesson(models.Model):
@@ -58,6 +54,7 @@ class Lesson(models.Model):
 
     def __str__(self):
         return self.lesson_name
+
 
 class Enrollment(models.Model):
 
@@ -81,11 +78,9 @@ class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
 
 
-
 class User_Answer(models.Model):
 
     score = models.IntegerField()
     learner_answer = models.CharField(max_length=500)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
