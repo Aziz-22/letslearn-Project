@@ -2,7 +2,7 @@
 # main_app/views.py
 from django.contrib.auth.models import User, auth
 from django.http.response import HttpResponseRedirect
-from main_app.models import User_Profile,Course, Lesson, Quiz, Question,Enrollment
+from main_app.models import User_Profile,Course, Lesson, Quiz, Question,Enrollment, User_Answer
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
@@ -13,8 +13,10 @@ from extra_views import CreateWithInlinesView, UpdateWithInlinesView, InlineForm
 from django.forms import modelformset_factory, inlineformset_factory,formset_factory
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.decorators import login_required
+import logging
 from django.utils.decorators import method_decorator
-# from django.contrib.auth.hashers import make_password
+
+
 
 
 
@@ -174,10 +176,10 @@ class profileUpdate(UpdateView):
 def ShowQuiz(request, course_id):
     quiz = Quiz.objects.get(course_id=course_id)
     qustions = Question.objects.filter(quiz_id = quiz.pk)
-    return render(request, 'takeQuiz.html', {'quiz': quiz, 'qustions': qustions})
+    return render(request, 'Quiz.html', {'quiz': quiz, 'qustions': qustions})
 
-def takeQuiz(request):
-    return render(request, 'takeQuiz.html')
+# def takeQuiz(request):
+#     return render(request, 'takeQuiz.html')
 
 
 def courseDetails(request, courseId):
@@ -205,7 +207,7 @@ class CourseCreate(CreateView):
     # fields = ['course_name', 'subject_title', 'level' ,'duration','user']
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        # self.object.user = self.request.user
+        self.object.user = self.request.user
         self.object.save()
         return HttpResponseRedirect('/TeacherCourses/' + str(self.object.user_id))
 
@@ -234,7 +236,7 @@ class QuizCreate(CreateWithInlinesView):
     template_name = "AddQuiz.html"
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        # self.object.user = self.request.user
+        self.object.user = self.request.user
         self.object.save()
         return HttpResponseRedirect('/TeacherCourses/' + str(self.object.user_id))
 
@@ -270,7 +272,11 @@ def courseView(request):
 @login_required(login_url='login')
 
 def EnrollCourse(request,course_id):
-    user = Enrollment.objects.create(course_id = course_id, user_id = 1)
+    def form_valid(self, form):
+            self.object = form.save(commit=False)
+            self.object.user = self.request.user
+            self.object.save()
+    user = Enrollment.objects.create(course_id = course_id, user_id = request.user.id)
     user.save()
     messages.success(request, 'Successfully Enrolled')
     return HttpResponseRedirect('/lessons/' + str(course_id))
@@ -281,13 +287,40 @@ class CourseDelete(DeleteView):
     template_name = 'course_confirm_delete.html'
     success_url = '../'
 
+def takeQuiz(request, question_id):
+    template_name = "Quiz.html"
+    if request.method =='POST':
+        print("question ID", question_id)
+        user_answer=request.POST.get('choices')
+        # answer = request.POST['selectedAnser']
+        question = Question.objects.get(id = question_id)
+        correctAnswer = question.correct_answer 
+        if user_answer == correctAnswer:
+            score = 1 
+            messages.info(request,'Answer is correct.')
+        elif user_answer != correctAnswer:
+            score = 0 
+            messages.info(request,'Answer is incorrect.')
+
+        def form_valid(self, form):
+            self.object = form.save(commit=False)
+            self.object.user = self.request.user
+            self.object.save()
+        UserAnswer = User_Answer.objects.create(learner_answer=user_answer, question_id=question_id, user_id=request.user.id, score=score )
+        UserAnswer.save()
+        # return redirect('/takeQuiz/'+str(question_id))
+        return render(request,'Quiz.html', {'score': UserAnswer})
+        # HttpResponseRedirect('/takeQuiz/' + str(quesstion_id))
+
+# def getScore():
+
 
 def EnrolledCourses(request):
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-    enroll = Enrollment.objects.filter(user_id=request.user)
+            self.object = form.save(commit=False)
+            self.object.user = self.request.user
+            self.object.save()
+    enroll = Enrollment.objects.filter(user_id = request.user)
     for i in enroll:
-        courses = Course.objects.filter(id=i.course_id)
-    return render(request, 'EnrolledInCourses.html', {'courses': courses})
+        courses = Course.objects.filter(id = i.course_id)
+    return render(request, 'EnrolledInCourses.html', {'courses':courses})

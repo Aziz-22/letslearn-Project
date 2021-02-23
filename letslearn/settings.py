@@ -97,6 +97,7 @@ DATABASES = {
         'NAME': 'newletslearn',
         'USER': 'postgres',
         'PASSWORD': 'admin22'
+
     }
 }
 

@@ -150,7 +150,7 @@
                     <h2>{{quiz.quiz_name}}</h2>
                     
                   <h3>
-                    <span class="label label-warning" id="qid">1</span>{{question.question_name}}
+                    <span class="label label-warning" id="qid">{{question.id}} </span> {{question.question_name}}
 
                   </h3>
                 </div>
@@ -168,17 +168,30 @@
                     </div>
                   </div>
       
+                  <form method="POST" action="/takeQuiz/{{question.id}}">
+                    {% csrf_token %}
                   <div class="quiz" id="quiz" data-toggle="buttons">
                     {% for choice in question.choices %}                    
                     <label class="element-animation1 btn btn-lg btn-primary btn-block"
                       ><span class="btn-label"
                         ><i class="glyphicon glyphicon-chevron-right"></i
                       ></span>
-                      <input type="radio" name="q_answer" value="1" />{{choice}}</label
+                      <input name='choices' type="radio" id ="choice{{choice.id}}" value="{{choice}}" />{{choice}}</label
                     >
                     {% endfor %}
                   </div>
+                  <br>
+                  {% if score == 0 %}
+                  <p> Incorrect </p>
+                  {% elif score == 1 %}
+                  <p> correct </p>
+                  {% endif %}
+                <input class='btn btn-dark' type="submit" name ="submit_button" value="Clicked!"/>
+                   
+                </form>
                 </div>
+               
+                
                 
                 <div class="modal-footer text-muted">
                   <span id="answer"></span>

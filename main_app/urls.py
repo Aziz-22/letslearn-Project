@@ -22,7 +22,9 @@ urlpatterns = [
 
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
-    path('takeQuiz/', views.takeQuiz, name='takeQuiz'),
+    
+    path('takeQuiz/<int:question_id>', views.takeQuiz, name='takeQuiz'),
+    
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="password_reset.html"),name='reset_password'),
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="password_reset_sent.html"),name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="password_reset_form.html"),name='password_reset_confirm'),
@@ -34,7 +36,9 @@ urlpatterns = [
     path('TeacherCourses/create/', views.CourseCreate.as_view(), name='addCourse_create'),
     path('TeacherCourses/update/<int:pk>', views.CourseUpdate.as_view(), name='addCourse_create'),
     path('TeacherCourses/<int:user_id>/', views.CoursesTeacher, name='courses_teacher'),
+   
     path('quiz/<int:course_id>/', views.ShowQuiz, name='course_quiz'),
+   
     path('TeacherCourses/course/create/', views.CourseCreate.as_view(), name='addCourse_create'),
     path('TeacherCourses/lesson/create/', views.LessonCreate.as_view(), name='addCourse_create'),
     path('TeacherCourses/quiz/create/', views.QuizCreate.as_view(), name='addCourse_create'),

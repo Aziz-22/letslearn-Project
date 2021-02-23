@@ -1,26 +1,64 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
-{'qustions' : range(qustions) }
+<br/>
+<br/>
 
 <hr/>
 
 <section id="contact" class="section-padding">
   <div class="container content">
     <div class="row">
+      
+        
       <div class="header-section text-center">
         <h2>Take your quiz</h2>
         <p>{{quiz.quiz_name}}</p>
         <hr class="bottom-line" />
+       
         {% for question in qustions %}
-        <h3>{{question.question_name}}</h3>
+        <form id = 'formABC' method="POST" action="/takeQuiz/{{question.id}}">
+          {% csrf_token %}
+        <h3>Q{{question.id}}: {{question.question_name}} ?</h3>
         {% for choice in question.choices %}
-        <input name= 'choices' type="radio"> {{choice}}</input> 
-        {% endfor %}
-        {% endfor %}
+        <input name='choices' type="radio" id ="choice{{choice.id}}" value="{{choice}}" > {{choice}}</input>
         
+        {% endfor %}
+        <!-- <h1>{{UserAnswer.score}}</h1> -->
+ 
+       {% if score.score == 0 %}
+        <p> Incorrect </p>
+        {% elif score.score == 1 %}
+        <p> correct </p>
+        {% endif %} 
+      <input type="submit" id = 'btnSubmit' name ="submit_button" value="Clicked!"/>
+         
+      </form>
+      {% endfor %}
       </div>
+      <div>
+        {% for message in messages %}
+        <p id='mpass'>{{message}}</p>
+        {% endfor %}
+    </div>
+      
+    
     </div>
   </div>
 </section>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("#formABC").submit(function (e) {
 
+    //stop submitting the form to see the disabled button effect
+    e.preventDefault();
+
+    //disable the submit button
+    $("#btnSubmit").attr("disabled", true);
+
+
+    return true;
+
+    });
+  });
+</script>
 
 {% endblock %}
