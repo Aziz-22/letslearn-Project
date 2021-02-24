@@ -166,15 +166,13 @@ EMAIL_USE_TLS = True
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/main_app/static/'
+STATIC_URL = '/static/'
 
 # location where you will store your static files
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'main_app/static'),
-    os.path.join(BASE_DIR,'main_app/static/css'),
-    os.path.join(BASE_DIR,'static/css')
-    
+    os.path.join(BASE_DIR,'static')
 ]
+
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
