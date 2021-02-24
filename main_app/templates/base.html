@@ -17,12 +17,15 @@
   <link rel="stylesheet" href="{% static 'css/teacherProfile.css' %}">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <!-- =======================================================
-    Theme Name: Mentor
-    Theme URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
-    Author: BootstrapMade.com
-    Author URL: https://bootstrapmade.com
-  ======================================================= -->
+ <style>
+    body {
+  background-color: white !important;
+}
+.dark-mode {
+  background-color: black !important;
+  color: white;
+}
+  </style>
 </head>
 
 <body>
@@ -43,8 +46,12 @@
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/">Home</a></li>
-            <li><a href="#feature">Features</a></li>
-            <li><a href="#courses">Courses</a></li>
+            <li><a href="/#feature">Features</a></li>
+            <li><a href="/#courses">Courses</a></li>
+            <li><label style="margin-top: 19px;">
+              <input  type="checkbox" onclick="myFunction()">
+              <span class="check">Dark Mode</span>
+              </label></li>
             <!-- Login As Teacher -->
             {% if user.is_authenticated and user.is_staff == True %}
 
@@ -58,10 +65,14 @@
 
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <li><a class="dropdown-item" href="/addCourse/create/">Add Course</a></li>
+                  <li><a class="dropdown-item" href="/TeacherCourses/create/">Add Course</a></li>
+                  <hr>
                   <li><a class="dropdown-item" href="/TeacherCourses/{{user.id}}/">My Courses</a></li>
-                  <li><a class="dropdown-item" href="/TeacherCourses/{{user.id}}/">My Quizzes</a></li>
+                  <hr>
+                  <li><a class="dropdown-item" href="/GetQuiz/">My Quizzes</a></li>
+                  <hr>
                   <li><a class="dropdown-item" href="/teacher/profile/{{user.id}}/update">Profile</a></li>
+                  <hr>
                   <li><a href="{% url 'logout' %}">Logout</a></li>
 
                 </div>
@@ -79,7 +90,9 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <li><a class="dropdown-item" href="/courses/">My Courses</a></li>
+                  <hr>
                   <li><a class="dropdown-item" href="/profile/{{user.id}}/update">Profile</a></li>
+                  <hr>
                   <li><a href="{% url 'logout' %}">Logout</a></li>
 
                 </div>
@@ -110,16 +123,10 @@
             <a href="#link"><i class="fa fa-facebook fa-fw"></i></a>
           </li>
           <li>
-            <a href="#link"><i class="fa fa-google-plus fa-fw"></i></a>
-          </li>
-          <li>
-            <a href="#link"><i class="fa fa-dribbble fa-fw"></i></a>
-          </li>
-          <li>
             <a href="#link"><i class="fa fa-linkedin fa-fw"></i></a>
           </li>
         </ul>
-        ©2021 Team 3. All rights reserved
+        ©2021 Let's Learn. All rights reserved
       </div>
   </div>
   </footer>
@@ -130,6 +137,11 @@
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
   <script src="{% static 'js/custom.js' %}"></script>
   <script src="{% static 'contactform/contactform.js' %}"></script>
+  <script>
+  function myFunction() {
+      var element = document.body;
+      element.classList.toggle("dark-mode");
+    }</script>
 </body>
 
 </html>

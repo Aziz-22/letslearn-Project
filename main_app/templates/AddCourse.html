@@ -15,9 +15,7 @@
       <div class="header-section text-center">
         <h2>Create Course</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Exercitationem nesciunt vitae,<br />
-          maiores, magni dolorum aliquam.
+          <br />
         </p>
         <hr class="bottom-line" />
       </div>
@@ -27,15 +25,13 @@
         <form method="post" enctype="multipart/form-data">
           {% csrf_token %} {{ form }}
           <hr />
-          {% for formset in inlines %} {{ formset }}
+          <!-- {% for formset in inlines %} {{ formset }}
           <hr />
-          {% endfor %}
-
+          {% endfor %} -->
           <input type="submit" value="Submit" />
         </form>
       </div>
     </div>
   </div>
 </section>
-
 {% endblock %}

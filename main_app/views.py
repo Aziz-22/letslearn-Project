@@ -2,35 +2,19 @@
 # main_app/views.py
 from django.contrib.auth.models import User, auth
 from django.http.response import HttpResponseRedirect
-from main_app.models import User_Profile,Course, Lesson, Quiz, Question,Enrollment
+from main_app.models import Course, Lesson, Quiz, Question,Enrollment, User_Answer
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponse
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
-from .forms import User_Profile_Form, AddCourseForm, LessonForm, QuizForm, QuestionForm, Teacher_Profile_Form, Preview_Image, PasswordForm
-from django.contrib.auth.forms import UserCreationForm
+from .forms import User_Profile_Form, AddCourseForm, LessonForm, QuizForm, QuestionForm
 from django.contrib import messages
-from extra_views import CreateWithInlinesView, UpdateWithInlinesView, InlineFormSetFactory
-from django.forms import modelformset_factory, inlineformset_factory,formset_factory
-from django.contrib.messages.views import SuccessMessageMixin
+from extra_views import CreateWithInlinesView, InlineFormSetFactory
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-# from django.contrib.auth.hashers import make_password
-
-
-
-
-# Afnan code
-
-
-
-# START Maryam Work 
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 def index(request):
     return render(request, 'index.html')
-
-
-
-# Abdulaziz's Code
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
 # Teacher Profile
@@ -48,43 +32,22 @@ class ProfileUpdate(UpdateView):
         messages.success(self.request, 'Updating Successfully!')
         return HttpResponseRedirect('/teacher/profile/' + str(self.object.pk) + '/update')
 
-
-class ProfileUpdateImage(UpdateView):
-    print("IMAGE")
-    template_name = "teacher_profile.html"
-    model = User_Profile_Form
-    # fields = ['image']
-    form_class = Teacher_Profile_Form
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.save()
-
-        return HttpResponseRedirect('/teacher/profile/' + str(self.object.pk) + '/update')
-
-
-def preview(request, pk):
-    user = request.user.User_Profile_Form
-    form = User_Profile_Form(instance=user)
-
+def change_password(request):
     if request.method == 'POST':
-        form = User_Profile_Form(request.POST, request.FILES, instance=user)
+        form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
-            form.save()
-
-    context = {'form': form}
-    return render(request, 'teacher_profile.html', context)
-
-# /Abdulaziz's Code
-
-
-def lessons(request):
-    return render(request, 'lessons.html')
-
-
-
-
-# Afnan code
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(
+                request, 'Your password was successfully updated!')
+            return redirect('/teacher/profile/' + str(user.id) + '/update')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'change_password.html', {
+        'form': form
+    })
 
 def signup(request):
 
@@ -115,16 +78,11 @@ def signup(request):
                 user.save()
                 print('user created')
                 return redirect ('login')
-
         else:
             messages.info(request, 'passowrd not matching')
             print('passowrd not matching')
             return redirect('signup')
         return redirect('/')
- 
-        
-
-
     else:
         return render(request, 'signup.html')
 
@@ -150,12 +108,7 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
-# end Afnan code
 
-
-
-
-# profile update shahad
 # Learner Profile
 # @login_required(login_url='login')
 @method_decorator(login_required(login_url='login'), name='dispatch')
@@ -170,34 +123,25 @@ class profileUpdate(UpdateView):
         messages.success(self.request, 'Updating Successfully!')
         return HttpResponseRedirect('/profile/' + str(self.object.pk)+ '/update')
 
-
 def ShowQuiz(request, course_id):
     quiz = Quiz.objects.get(course_id=course_id)
     qustions = Question.objects.filter(quiz_id = quiz.pk)
-    return render(request, 'takeQuiz.html', {'quiz': quiz, 'qustions': qustions})
+    return redirect('../..', {'quiz': quiz, 'qustions': qustions})
 
-def takeQuiz(request):
-    return render(request, 'takeQuiz.html')
-
-
+@login_required(login_url='login')
 def courseDetails(request, courseId):
     course = Course.objects.get(id = courseId)
     lessons = Lesson.objects.filter(course = courseId)
+    quiz = Quiz.objects.get(course_id=courseId)
+    qustions = Question.objects.filter(quiz_id = quiz.pk)
     newLink = []
     for lesson in lessons:
-        newLink.append(lesson.lesson_link.replace("watch?v=", "embed/"))
+        lesson.lesson_link = lesson.lesson_link.replace("watch?v=", "embed/")
     # quiz = Quiz.objects.filter(course = courseId)
     # question = Question.objects.filter(course = courseId)
-    return render(request, 'lessons.html', {'course':course, 'lessons':lessons, 'newLink': newLink})
+    return render(request, 'lessons.html', {'course':course, 'lessons':lessons,'quiz': quiz, 'qustions': qustions})
 
-
-
-
-def addCourse(request):
-    return render(request, 'AddCourse.html')
-
-
-
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class CourseCreate(CreateView):
     model = Course
     form_class = AddCourseForm
@@ -205,11 +149,11 @@ class CourseCreate(CreateView):
     # fields = ['course_name', 'subject_title', 'level' ,'duration','user']
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        # self.object.user = self.request.user
+        self.object.user = self.request.user
         self.object.save()
         return HttpResponseRedirect('/TeacherCourses/' + str(self.object.user_id))
 
-
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class LessonCreate(CreateView):
     model = Lesson
     form_class = LessonForm
@@ -218,14 +162,11 @@ class LessonCreate(CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.save()
-        return HttpResponseRedirect('/lessons/' + str(self.object.course_id))
-
-
+        return HttpResponseRedirect('/TeacherCourses/quiz/create/')
 
 class QuestionCreate(InlineFormSetFactory):
     model = Question 
     form_class = QuestionForm
-
 
 class QuizCreate(CreateWithInlinesView):
     model = Quiz 
@@ -234,11 +175,9 @@ class QuizCreate(CreateWithInlinesView):
     template_name = "AddQuiz.html"
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        # self.object.user = self.request.user
+        self.object.user = self.request.user
         self.object.save()
         return HttpResponseRedirect('/TeacherCourses/' + str(self.object.user_id))
-
-
 
 class CourseUpdate(UpdateView):
     model = Course
@@ -250,37 +189,82 @@ class CourseUpdate(UpdateView):
         self.object.save()
         return HttpResponseRedirect('/TeacherCourses/' + str(self.object.user_id))
 
-
-
 def CoursesTeacher(request, user_id):
       courses = Course.objects.filter(user_id=user_id)
       template_name = "CoursesTeacher.html"
       return render(request, 'CoursesTeacher.html', {'courses': courses})
-
-
-
 
 def courseView(request):
     courses = Course.objects.all()
     model = Course
     template_name = "index.html"
     return render(request, 'index.html', {'courses': courses})
-
-    
+  
 @login_required(login_url='login')
-
 def EnrollCourse(request,course_id):
-    user = Enrollment.objects.create(course_id = course_id, user_id = 1)
+    def form_valid(self, form):
+            self.object = form.save(commit=False)
+            self.object.user = self.request.user
+            self.object.save()
+    user = Enrollment.objects.create(course_id = course_id, user_id = request.user.id)
     user.save()
     messages.success(request, 'Successfully Enrolled')
     return HttpResponseRedirect('/lessons/' + str(course_id))
-#end of work
 
 class CourseDelete(DeleteView):
     model = Course 
     template_name = 'course_confirm_delete.html'
-    success_url = '../'
+    def form_valid(self, form):
+            self.object = form.save(commit=False)
+            self.object.user = self.request.user
+            self.object.save()
+            # return HttpResponseRedirect('/TeacherCourses/' + str(self.object.user_id))
+    success_url = '/'
 
+def takeQuiz(request, question_id):
+    template_name = "Quiz.html"
+    if request.method =='POST':
+        print("question ID", question_id)
+        user_answer=request.POST.get('choices')
+        # answer = request.POST['selectedAnser']
+        question = Question.objects.get(id = question_id)
+        correctAnswer = question.correct_answer 
+        if user_answer == correctAnswer:
+            score = 1 
+            messages.info(request,'Answer is correct.')
+        elif user_answer != correctAnswer:
+            score = 0 
+            messages.info(request,'Answer is incorrect.')
+        def form_valid(self, form):
+            self.object = form.save(commit=False)
+            self.object.user = self.request.user
+            self.object.save()
+        request.session['isMaryam'] = True 
+        UserAnswer = User_Answer.objects.create(learner_answer=user_answer, question_id=question_id, user_id=request.user.id, score=score )
+        UserAnswer.save() 
+        quiz = Quiz.objects.get(id=question.quiz_id)
+        course = Course.objects.get(id=quiz.course_id)
+        context = {'isMaryam': True} 
+        course = Course.objects.get(id = course.id)
+        lessons = Lesson.objects.filter(course = course.id)
+        quiz = Quiz.objects.get(course_id=course.id)
+        qustions = Question.objects.filter(quiz_id = quiz.pk)
+        newLink = []
+        for lesson in lessons:
+            lesson.lesson_link = lesson.lesson_link.replace("watch?v=", "embed/")
+    # quiz = Quiz.objects.filter(course = courseId)
+    # question = Question.objects.filter(course = courseId)
+        return render(request, 'lessons.html', {'course':course, 'lessons':lessons,'quiz': quiz, 'qustions': qustions, 'isMaryam': True})
+
+def getQuizes(request):
+    def form_valid(self, form):
+            self.object = form.save(commit=False)
+            self.object.user = self.request.user
+            self.object.save() 
+    quizes = Quiz.objects.filter(user_id=request.user.id)
+    for quiz in quizes:
+        courses = Course.objects.filter(id =quiz.course_id )
+    return render(request, 'Quizes.html', {'courses':courses,'quizes':quizes})
 
 def EnrolledCourses(request):
     def form_valid(self, form):

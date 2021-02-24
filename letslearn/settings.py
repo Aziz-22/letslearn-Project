@@ -77,7 +77,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'letslearn.urls'
 
-import os
+
 SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 
 TEMPLATES = [
