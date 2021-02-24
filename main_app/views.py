@@ -151,7 +151,7 @@ class CourseCreate(CreateView):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
-        return HttpResponseRedirect('/TeacherCourses/' + str(self.object.user_id))
+        return HttpResponseRedirect('/TeacherCourses/lesson/create/')
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
 class LessonCreate(CreateView):
@@ -231,10 +231,8 @@ def takeQuiz(request, question_id):
         correctAnswer = question.correct_answer 
         if user_answer == correctAnswer:
             score = 1 
-            messages.info(request,'Answer is correct.')
         elif user_answer != correctAnswer:
             score = 0 
-            messages.info(request,'Answer is incorrect.')
         def form_valid(self, form):
             self.object = form.save(commit=False)
             self.object.user = self.request.user
