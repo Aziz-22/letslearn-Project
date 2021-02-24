@@ -170,7 +170,10 @@ STATIC_URL = '/main_app/static/'
 
 # location where you will store your static files
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'main_app/static')
+    os.path.join(BASE_DIR,'main_app/static'),
+    os.path.join(BASE_DIR,'main_app/static/css'),
+    os.path.join(BASE_DIR,'static/css')
+    
 ]
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
