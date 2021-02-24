@@ -166,7 +166,7 @@ EMAIL_USE_TLS = True
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
+STATIC_URL = '/main_app/static/'
 
 # location where you will store your static files
 STATICFILES_DIRS = [
