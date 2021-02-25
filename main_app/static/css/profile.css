@@ -19,8 +19,10 @@ body{
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    border: 0 solid rgba(0,0,0,.125);
-    border-radius: .25rem;
+    border: 0 solid rgba(0, 0, 0, .125);
+    border-radius: .55rem;
+    margin-bottom: 30px;
+    width: 90%;
 }
 
 .card-body {
@@ -68,10 +70,7 @@ body{
     display: flex;
     justify-content: center;
 }
-.btn-success{
-    margin-left: 200px;
-    margin-top: 50px;
-}
+
 .form-control{
     margin-top: 8px;
 }

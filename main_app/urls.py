@@ -1,4 +1,5 @@
 # main_app/urls.py
+from django.conf.urls import url
 from django.urls import path
 from main_app import views
 from django.contrib.auth import views as auth_views  
@@ -6,23 +7,14 @@ from django.contrib.auth import views as auth_views
 
 # Afnan code
 urlpatterns = [
-    # Abdulaziz's Code
+    
     path('teacher/profile/<int:pk>/update/', views.ProfileUpdate.as_view(), name='profile_update'),
-
-    #     path('teacher/profile/<int:pk>/update/password/',
-    #          views.PasswordUpdate.as_view(), name='password_update'),
-
-    path('teacher/profile/<int:pk>/update/image/',
-         views.preview, name='image_update'),
-    # END Abdulaziz's Code
+    path('change_password/', views.change_password, name="change_password"),
     path('lessons/<int:courseId>', views.courseDetails, name='lessons'),
     # Afnan code
     path('signup/', views.signup, name='signup'),
-
-
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
-    
     path('takeQuiz/<int:question_id>', views.takeQuiz, name='takeQuiz'),
     
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="password_reset.html"),name='reset_password'),
@@ -55,8 +47,6 @@ urlpatterns = [
 
     path('profile/<int:pk>/update', views.profileUpdate.as_view(), name='User_Profile'),
     
-
-     #   abdulaziz and shahad work on enroll btn
     path('enroll/<int:course_id>/' , views.EnrollCourse, name='Enroll'),
     path('',views.courseView, name='courseView')
 

@@ -5,14 +5,15 @@
     Author URL: https://bootstrapmade.com
 */
 
+
+
 .base {
   height: 1000px;
 }
 .buttonCard{
   display: flex;
-  justify-content: center;
-  align-items: space-between;
   margin-bottom: 30px;
+  justify-content: space-around;
 }
 .createClass{
   width: 60%;
@@ -65,7 +66,8 @@ h6 {
   color: #4b4b4c;
 }
 a {
-  color: #5fcf80;
+  color: navy;
+  vertical-align: sub;
 }
 a:hover,
 a:focus {
@@ -332,8 +334,7 @@ h2 {
   text-align: left;
 }
 .heading p {
-  text-align: left;
-  text-align: inherit;
+  text-align: initial;
 }
 /***********************************
  Organisations
@@ -505,6 +506,9 @@ Course
 [class^="imghvr-"] {
   background-color: #5fcf80;
   color: #fff;
+  border: 2px inset ;
+  border-radius: 10px 10px;
+  box-shadow: 20px 10px 10px grey;
 }
 /***********************************
 Price Table
@@ -720,8 +724,11 @@ Footer
 }
 .btn {
   padding: 10px 30px;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 0px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  color: white;
+ 
 }
 .light-form-button {
   background: #5fcf80;
@@ -912,4 +919,33 @@ Responsive media queries
   padding-top: 20px;
   padding-bottom: 100%;
   border-radius: 10%;
+}
+
+@media (min-width: 768px){
+.container-fluid>.navbar-collapse,
+.container-fluid>.navbar-header,
+.container>.navbar-collapse,
+.container>.navbar-header {
+  margin-right: -105px;
+  margin-left: -90px;
+}
+
+}
+
+.dropdown-menu>li>a:hover {
+  display: block;
+  padding: 25px 20px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.42857143;
+  white-space: nowrap;
+  background: #5fcf80;
+  color: #fff;
+  transition: 250ms;
+
+}
+
+.cards {
+ 
+  box-shadow: 10px 10px grey !important;
 }

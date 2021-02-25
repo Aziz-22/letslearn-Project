@@ -3,6 +3,7 @@ body {
     color: #1a202c;
     text-align: center;
     padding-top: 20px;
+   
 }
 
 .main-body {
@@ -23,6 +24,8 @@ body {
     background-clip: border-box;
     border: 0 solid rgba(0, 0, 0, .125);
     border-radius: .55rem;
+    margin-bottom: 30px;
+    width: 90%;
 }
 
 .card-body {
@@ -34,13 +37,14 @@ body {
 .gutters-sm {
     margin-right: -8px;
     margin-left: -8px;
+    width: 80%;
 }
 
 .gutters-sm>.col,
 .gutters-sm>[class*=col-] {
     padding-right: 8px;
     padding-left: 8px;
-    height: 800px;
+    height: 600px;
 }
 
 .mb-3,
@@ -61,11 +65,14 @@ body {
 }
 
 
-.btn {
+#dropdownMenuButton {
     margin-left: 0px;
-    margin-top: 0px;
+    margin-top: 10px;
     margin-bottom: 0px;
-    
+    background-color: #5FCF80;
+    color: white;
+    border-radius: 60px;
+        
 }
 
 .profile_form{

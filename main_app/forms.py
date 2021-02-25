@@ -26,18 +26,14 @@ class User_Profile_Form(forms.ModelForm):
 class Teacher_Profile_Form(forms.ModelForm):
     class Meta:
         model = User_Profile
-        fields = ['major' , 'experience' , 'image']
-        widgets = {
-            'major': forms.TextInput(attrs={'class': 'form-control'}),
-            'experience': forms.TextInput(attrs={'class': 'form-control'}),
-            
-        }
-
-
-class Preview_Image():
-    class Meta:
-        model = User_Profile
         fields = ['image']
+        # widgets = {
+        #     'major': forms.TextInput(attrs={'class': 'form-control'}),
+        #     'experience': forms.TextInput(attrs={'class': 'form-control'}),
+            
+        # }
+
+
 
 
 class PasswordForm(forms.ModelForm):
