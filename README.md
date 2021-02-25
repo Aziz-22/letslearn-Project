@@ -130,8 +130,6 @@ Inside /letslearn folder Run `python3 manage.py runserver`. for the project to s
 
 > Enable user to switch from english to arabic languge.
 
-> Add parent as user.
-
 > Add games for a quiz.
 
 ### Contributors <p align="center">  
