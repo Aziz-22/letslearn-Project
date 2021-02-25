@@ -83,7 +83,7 @@ Home         |  SignUp | Login  |  Profile Teacher      |  Profiles Learner     
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------|:-------------------------:|
 <img src="https://imgur.com/J0QUqhS.png" title="Home App   " width="100%"> |<img src="https://imgur.com/RXO2IQf.png" title="SignUp" width="100%">|<img src="https://imgur.com/jZIsbRn.png" title="Login" width="100%"> |<img src="https://imgur.com/JDfi9Zg.png" title="Login" width="100%"> |<img src="https://imgur.com/Ds5DWB7.png" title="courses" width="100%">|<img src="https://imgur.com/lVAhspK.png" title="Clinics" width="100%">
 
-Eidte\Delete Courses| Lesson | view video Lesson | Courses|||
+Eidt\Delete Courses| Lesson | view video Lesson | Courses|||
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
 <img src="https://imgur.com/hMK0DrW.png" title="Home App   " width="100%"> |<img src="https://imgur.com/z1rucE2.png" title="SignUp" width="100%">|<img src="https://imgur.com/b5LdsRr.png" title="Login" width="100%">|<img src="https://imgur.com/lVAhspK.png" title="Login" width="100%"> 
  
