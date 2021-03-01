@@ -1,11 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
-from django.forms import fields, widgets
 from .models import User, Course, Lesson, User_Profile, Quiz, Question
-
-
-
-#forms for profile shahad
 
 class User_Profile_Form(forms.ModelForm):
         class Meta:
@@ -20,9 +15,6 @@ class User_Profile_Form(forms.ModelForm):
                 
             }
 
-
-
-
 class Teacher_Profile_Form(forms.ModelForm):
     class Meta:
         model = User_Profile
@@ -33,13 +25,6 @@ class Teacher_Profile_Form(forms.ModelForm):
             
         }
 
-
-class Preview_Image():
-    class Meta:
-        model = User_Profile
-        fields = ['image']
-
-
 class PasswordForm(forms.ModelForm):
     class Meta:
         model = User
@@ -49,9 +34,6 @@ class PasswordForm(forms.ModelForm):
             'password': forms.TextInput(attrs={'type': 'password'}),
         }
 
-# START Maryam Work
-
-
 class AddCourseForm(forms.ModelForm):
     class Meta:
         model = Course
@@ -60,16 +42,17 @@ class AddCourseForm(forms.ModelForm):
         subjects = (
             ('', 'Select a subject'),
             # First one is the value of select option and second is the displayed value in option
-            ('Math', 'Math'),
-            ('English', 'English'),
+            ('programming', 'programming'),
+            ('statistic', 'statistic'),
             ('Scince', 'Scince'),
+            ('English', 'English'),
         )
         levels = (
             ('', 'Select a levels'),
             # First one is the value of select option and second is the displayed value in option
-            ('1st garde', '1st garde'),
-            ('2st garde', '2st garde'),
-            ('3st garde', '3st garde'),
+            ('Beginner', 'Beginner'),
+            ('Intermediate', 'Intermediate'),
+            ('Advanced', 'Advanced'),
         )
         widgets = {
             'course_name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -89,7 +72,10 @@ class QuizForm(forms.ModelForm):
             widgets = {
                 'course' : forms.Select(attrs={'class':'form-control'}),
                 'quiz_name' : forms.TextInput(attrs={'class':'form-control'}),
+<<<<<<< HEAD
                 
+=======
+>>>>>>> f164903b27f5357d7f8a6b018402136e20ed3cfb
             }
 
 
@@ -103,8 +89,6 @@ class LessonForm(forms.ModelForm):
             'lesson_link': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
-
-
 class QuestionForm(forms.ModelForm):
     class Meta:
             model = Question
@@ -115,8 +99,4 @@ class QuestionForm(forms.ModelForm):
                 'choices' : forms.TextInput(attrs={'class':'form-control'}),
                 'correct_answer' : forms.TextInput(attrs={'class':'form-control'}),
             }
-
-# ArticleFormSet = formset_factory(ArticleForm, extra=2)
-
-        
 

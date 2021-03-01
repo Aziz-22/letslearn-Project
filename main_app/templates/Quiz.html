@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'base.html' %} {% load static %} {% block content %}
 <br/>
 <br/>
@@ -9,6 +10,8 @@
     <div class="row">
       
         
+=======
+>>>>>>> f164903b27f5357d7f8a6b018402136e20ed3cfb
       <div class="header-section text-center">
         <h2>Take your quiz</h2>
         <p>{{quiz.quiz_name}}</p>
@@ -17,6 +20,7 @@
         {% for question in qustions %}
         <form id = 'formABC' method="POST" action="/takeQuiz/{{question.id}}">
           {% csrf_token %}
+<<<<<<< HEAD
         <h3>Q{{question.id}}: {{question.question_name}} ?</h3>
         {% for choice in question.choices %}
         <input name='choices' type="radio" id ="choice{{choice.id}}" value="{{choice}}" > {{choice}}</input>
@@ -31,6 +35,20 @@
         {% endif %} 
       <input type="submit" id = 'btnSubmit' name ="submit_button" value="Clicked!"/>
          
+=======
+        <h3>{{question.question_name}} ?</h3>
+        {% for choice in question.choices %}
+        <input name='choices' type="radio" id ="choice{{choice.id}}" value="{{choice}}" > {{choice}}</input>
+        {% endfor %}
+        <!-- <h1>{{UserAnswer.score}}</h1> -->
+       {% if score.score == 0 %}
+        <h4> Incorrect </h4>
+        {% elif score.score == 1 %}
+        <h4> correct </h4>
+        {% endif %} 
+        <br>
+      <input type="submit" id ='btnSubmit' class="btn btn-green" name ="submit_button" value="Clicked!"/>
+>>>>>>> f164903b27f5357d7f8a6b018402136e20ed3cfb
       </form>
       {% endfor %}
       </div>
@@ -39,14 +57,18 @@
         <p id='mpass'>{{message}}</p>
         {% endfor %}
     </div>
+<<<<<<< HEAD
       
     
+=======
+>>>>>>> f164903b27f5357d7f8a6b018402136e20ed3cfb
     </div>
   </div>
 </section>
 <script type="text/javascript">
   $(document).ready(function () {
     $("#formABC").submit(function (e) {
+<<<<<<< HEAD
 
     //stop submitting the form to see the disabled button effect
     e.preventDefault();
@@ -62,3 +84,13 @@
 </script>
 
 {% endblock %}
+=======
+    //stop submitting the form to see the disabled button effect
+    e.preventDefault();
+    //disable the submit button
+    $("#btnSubmit").attr("disabled", true);
+    return true;
+    });
+  });
+</script>
+>>>>>>> f164903b27f5357d7f8a6b018402136e20ed3cfb

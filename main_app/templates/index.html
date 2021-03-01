@@ -1,56 +1,5 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} {% load static %}
 
-
-
-<!--Navigation bar-->
-
-<!-- <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="">Home</a></li>
-          <li><a href="#organisations">Organisations</a></li>
-          <li><a href="#courses">Courses</a></li>
-          <li><a href="#pricing">Pricing</a></li> -->
-<!-- Login As Teacher -->
-<!-- {% if user.is_authenticated and user.is_staff == True %}
-          <li><a href="">Home</a></li> -->
-<!-- <li><a href=''>Hello, {{user.first_name}}</a></li> -->
-<!-- <li>
-            <ul class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-user"></i>
-                Hello, {{user.first_name}} <br>
-
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" href="#">Add Course</a></li>
-                <li><a class="dropdown-item" href="/teacher/profile/{{user.id}}/update">Profile</a>
-                </li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-
-
-
-              </div>
-            </ul>
-          </li> -->
-<!-- Login As Learner -->
-<!-- {% elif user.is_authenticated and user.is_staff == False %}
-          <li><a href=''>Hello, {{user.first_name}}</a></li>
-          <li><a href="{% url 'logout' %}">logout</a></li>
-          {% else %}
-          <li><a href="{% url 'signup' %}">Sign Up</a></li>
-          <li><a href="{% url 'login' %}">Login</a></li>
-          {%endif%} -->
-<!-- {% if user.is_authenticated  %}
-            <li><a href=''>Hello, {{user.first_name}}</a></li>
-            <li><a href="{% url 'logout' %}">logout</a></li>
-            {% else %}
-            <li><a href="{% url 'signup' %}">Sign Up</a></li>
-            <li><a href="{% url 'login' %}" >Login</a></li>
-            {%endif%} -->
-
-<!--/ Navigation bar-->
 <!--Modal box-->
 {% block content %}
 <div class="modal fade" id="login" role="dialog">
@@ -70,41 +19,63 @@
             <form name="" id="loginForm">
               <div class="form-group has-feedback">
                 <!----- username -------------->
-                <input class="form-control" placeholder="Username" id="loginid" type="text" autocomplete="off" />
-                <span style="
-                        display: none;
-                        font-weight: bold;
-                        position: absolute;
-                        color: red;
-                        position: absolute;
-                        padding: 4px;
-                        font-size: 11px;
-                        background-color: rgba(128, 128, 128, 0.26);
-                        z-index: 17;
-                        right: 27px;
-                        top: 5px;
-                      " id="span_loginid"></span>
+                <input
+                  class="form-control"
+                  placeholder="Username"
+                  id="loginid"
+                  type="text"
+                  autocomplete="off"
+                />
+                <span
+                  style="
+                    display: none;
+                    font-weight: bold;
+                    position: absolute;
+                    color: red;
+                    position: absolute;
+                    padding: 4px;
+                    font-size: 11px;
+                    background-color: rgba(128, 128, 128, 0.26);
+                    z-index: 17;
+                    right: 27px;
+                    top: 5px;
+                  "
+                  id="span_loginid"
+                ></span>
                 <!---Alredy exists  ! -->
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <span
+                  class="glyphicon glyphicon-user form-control-feedback"
+                ></span>
               </div>
               <div class="form-group has-feedback">
                 <!----- password -------------->
-                <input class="form-control" placeholder="Password" id="loginpsw" type="password" autocomplete="off" />
-                <span style="
-                        display: none;
-                        font-weight: bold;
-                        position: absolute;
-                        color: grey;
-                        position: absolute;
-                        padding: 4px;
-                        font-size: 11px;
-                        background-color: rgba(128, 128, 128, 0.26);
-                        z-index: 17;
-                        right: 27px;
-                        top: 5px;
-                      " id="span_loginpsw"></span>
+                <input
+                  class="form-control"
+                  placeholder="Password"
+                  id="loginpsw"
+                  type="password"
+                  autocomplete="off"
+                />
+                <span
+                  style="
+                    display: none;
+                    font-weight: bold;
+                    position: absolute;
+                    color: grey;
+                    position: absolute;
+                    padding: 4px;
+                    font-size: 11px;
+                    background-color: rgba(128, 128, 128, 0.26);
+                    z-index: 17;
+                    right: 27px;
+                    top: 5px;
+                  "
+                  id="span_loginpsw"
+                ></span>
                 <!---Alredy exists  ! -->
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <span
+                  class="glyphicon glyphicon-lock form-control-feedback"
+                ></span>
               </div>
               <div class="row">
                 <div class="col-xs-12">
@@ -115,7 +86,11 @@
                   </div>
                 </div>
                 <div class="col-xs-12">
-                  <button type="button" class="btn btn-green btn-block btn-flat" onclick="userlogin()">
+                  <button
+                    type="button"
+                    class="btn btn-green btn-block btn-flat"
+                    onclick="userlogin()"
+                  >
                     Sign In
                   </button>
                 </div>
@@ -145,41 +120,63 @@
             <form name="" id="loginForm">
               <div class="form-group has-feedback">
                 <!----- username -------------->
-                <input class="form-control" placeholder="Username" id="loginid" type="text" autocomplete="off" />
-                <span style="
-                      display: none;
-                      font-weight: bold;
-                      position: absolute;
-                      color: red;
-                      position: absolute;
-                      padding: 4px;
-                      font-size: 11px;
-                      background-color: rgba(128, 128, 128, 0.26);
-                      z-index: 17;
-                      right: 27px;
-                      top: 5px;
-                    " id="span_loginid"></span>
+                <input
+                  class="form-control"
+                  placeholder="Username"
+                  id="loginid"
+                  type="text"
+                  autocomplete="off"
+                />
+                <span
+                  style="
+                    display: none;
+                    font-weight: bold;
+                    position: absolute;
+                    color: red;
+                    position: absolute;
+                    padding: 4px;
+                    font-size: 11px;
+                    background-color: rgba(128, 128, 128, 0.26);
+                    z-index: 17;
+                    right: 27px;
+                    top: 5px;
+                  "
+                  id="span_loginid"
+                ></span>
                 <!---Alredy exists  ! -->
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <span
+                  class="glyphicon glyphicon-user form-control-feedback"
+                ></span>
               </div>
               <div class="form-group has-feedback">
                 <!----- password -------------->
-                <input class="form-control" placeholder="Password" id="loginpsw" type="password" autocomplete="off" />
-                <span style="
-                      display: none;
-                      font-weight: bold;
-                      position: absolute;
-                      color: grey;
-                      position: absolute;
-                      padding: 4px;
-                      font-size: 11px;
-                      background-color: rgba(128, 128, 128, 0.26);
-                      z-index: 17;
-                      right: 27px;
-                      top: 5px;
-                    " id="span_loginpsw"></span>
+                <input
+                  class="form-control"
+                  placeholder="Password"
+                  id="loginpsw"
+                  type="password"
+                  autocomplete="off"
+                />
+                <span
+                  style="
+                    display: none;
+                    font-weight: bold;
+                    position: absolute;
+                    color: grey;
+                    position: absolute;
+                    padding: 4px;
+                    font-size: 11px;
+                    background-color: rgba(128, 128, 128, 0.26);
+                    z-index: 17;
+                    right: 27px;
+                    top: 5px;
+                  "
+                  id="span_loginpsw"
+                ></span>
                 <!---Alredy exists  ! -->
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <span
+                  class="glyphicon glyphicon-lock form-control-feedback"
+                ></span>
               </div>
               <div class="row">
                 <div class="col-xs-12">
@@ -190,7 +187,11 @@
                   </div>
                 </div>
                 <div class="col-xs-12">
-                  <button type="button" class="btn btn-green btn-block btn-flat" onclick="userlogin()">
+                  <button
+                    type="button"
+                    class="btn btn-green btn-block btn-flat"
+                    onclick="userlogin()"
+                  >
                     Sign In
                   </button>
                 </div>
@@ -234,9 +235,10 @@
       <div class="header-section text-center">
         <h2>Features</h2>
         <p>
-          Learn 100% online with world class universities and industry experts. <br> Develop hobbies, new skills and
-          career-changing
-          expertise with our flexible courses.
+          Learn 100% online with world class universities and industry experts.
+          <br />
+          Develop hobbies, new skills and career-changing expertise with our
+          flexible courses.
         </p>
         <hr class="bottom-line" />
       </div>
@@ -246,9 +248,9 @@
             <div class="heading pull-right">
               <h4>Learn Anything</h4>
               <p>
-                Whether you want to develop as a professional or discover a new hobby, theres an online course for the.
-                You can even
-                take your learning further with online course
+                Whether you want to develop as a professional or discover a new
+                hobby, theres an online course for the. You can even take your
+                learning further with online course
               </p>
             </div>
             <div class="fea-img pull-left">
@@ -261,9 +263,9 @@
             <div class="heading pull-right">
               <h4>Learn With Experts</h4>
               <p>
-                Meet educators from top universities and cultural institutions, who'll share their experience through
-                videos, articles
-                quizzes and discussions.
+                Meet educators from top universities and cultural institutions,
+                who'll share their experience through videos, articles quizzes
+                and discussions.
               </p>
             </div>
             <div class="fea-img pull-left">
@@ -276,9 +278,8 @@
             <div class="heading pull-right">
               <h4>Choose You Teacher Experts</h4>
               <p>
-                meet educators with high experience, who'll share their experience through videos, articles quizzes and
-                discussions.
-
+                meet educators with high experience, who'll share their
+                experience through videos, articles quizzes and discussions.
               </p>
             </div>
             <div class="fea-img pull-left">
@@ -299,22 +300,30 @@
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
           <div class="orga-stru">
             <h3>77%</h3>
-            <p>Of the E-Learning industry is comprised of self-paced learning models.</p>
+            <p>
+              Of the E-Learning industry is comprised of self-paced learning
+              models.
+            </p>
             <i class="fa fa-male"></i>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
           <div class="orga-stru">
             <h3>96%</h3>
-            <p>Of students, especially children, say that E-Learning tools are fun to use and help them learn things on
-              their own</p>
+            <p>
+              Of students, especially children, say that E-Learning tools are
+              fun to use and help them learn things on their own
+            </p>
             <i class="fa fa-male"></i>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
           <div class="orga-stru">
             <h3>60%</h3>
-            <p>E-Learning is proven to increase knowledge retention by 25% to 60%.</p>
+            <p>
+              E-Learning is proven to increase knowledge retention by 25% to
+              60%.
+            </p>
             <i class="fa fa-male"></i>
           </div>
         </div>
@@ -327,7 +336,6 @@
             </h3>
             <h4 class="sm-txt">(Revised and Updated for 2021)</h4>
           </hgroup>
-         
         </div>
       </div>
     </div>
@@ -345,8 +353,7 @@
       <div class="col-md-4 col-sm-6">
         <div class="service-box text-center">
           <div class="icon-box">
-        <img src="https://i.imgur.com/D6x32yL.png"
-          class="img-responsive">
+            <img src="https://i.imgur.com/D6x32yL.png" class="img-responsive" />
           </div>
           <div class="icon-text">
             <h4 class="ser-text">Python3 Course</h4>
@@ -356,11 +363,13 @@
       <div class="col-md-4 col-sm-6">
         <div class="service-box text-center">
           <div class="icon-box">
-            <img src="https://www.creativetools.se/image/cache/catalog/product/adobe/photoshop-cc/Adobe-Photoshop-2020-Logos-1280x720.jpg"
-              class="img-responsive">
+            <img
+              src="https://www.creativetools.se/image/cache/catalog/product/adobe/photoshop-cc/Adobe-Photoshop-2020-Logos-1280x720.jpg"
+              class="img-responsive"
+            />
           </div>
           <div class="icon-text">
-            <h4 class="ser-text"> Photoshop Course</h4>
+            <h4 class="ser-text">Photoshop Course</h4>
           </div>
         </div>
       </div>
@@ -370,11 +379,7 @@
       <div class="col-md-4 col-sm-6">
         <div class="service-box text-center">
           <div class="icon-box">
-            <img
-              src="https://i.imgur.com/OkLwAk9.png"
-              class="img-responsive" >
-            
-
+            <img src="https://i.imgur.com/OkLwAk9.png" class="img-responsive" />
           </div>
           <div class="icon-text">
             <h4 class="ser-text">Security+ Course</h4>
@@ -386,9 +391,7 @@
 </section>
 <!--/ work-shop-->
 
-
 <!--Courses-->
-
 
 <section id="courses" class="section-padding">
   <div class="container">
@@ -400,17 +403,25 @@
       {% for course in courses %}
       <div class="col-md-4 col-sm-6 padleft-right">
         <figure class="imghvr-fold-up">
-          <img src="{{ course.course_image.url }}" width="400px" height="350px" />
+          <img
+            src="{{ course.course_image.url }}"
+            width="400px"
+            height="350px"
+          />
           <figcaption>
             <h3>{{ course.course_name }}</h3>
-            <p>
-              {{ course.description }}
-            </p>
+            <p>{{ course.description }}</p>
           </figcaption>
           <a href="/lessons/{{course.id}}"></a>
         </figure>
         {% if user.is_authenticated and user.is_staff == False %}
-        <button><a href="/enroll/{{course.id}}">Enroll</a></button>
+        <button class="btn btn-success">
+          <a style="color: white" href="/enroll/{{course.id}}">Enroll</a>
+        </button>
+        {% elif user.is_staff != True %}
+        <button class="btn btn-success">
+          <a style="color: white" href="/enroll/{{course.id}}">Enroll</a>
+        </button>
         {% endif %}
       </div>
       {% endfor %}
@@ -418,11 +429,4 @@
   </div>
 </section>
 <!--/ Courses-->
-
-
-
-
-
-
-
 {% endblock %}
